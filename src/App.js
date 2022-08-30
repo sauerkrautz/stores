@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useMemo } from "react";
+import Main from "./components/Main";
+import Sidebar from "./components/main/Sidebar.jsx";
+import useFetch from "./hooks/useFetch";
+import Home from "./components/main/Home";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
+  const fetchThings = useFetch("https://fakestoreapi.com/products?limit=20");
+  const memoData = useMemo(() => {
+    return fetchThings;
+  }, [fetchThings]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Home data={memoData} />} />
+        <Route path="/list" element={<Main data={memoData} />} />
+      </Routes>
+    </>
   );
 }
 
