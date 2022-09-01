@@ -16,7 +16,7 @@ const Home = ({ data }) => {
 
   useEffect(() => {
     return setDataset(chart);
-  }, []);
+  }, [data]);
 
   console.log(data);
   console.log(dataset);

@@ -5,11 +5,14 @@ import Sidebar from "./main/Sidebar";
 import Image from "./Image";
 
 const Main = ({ data }) => {
+  const memoData = useMemo(() => {
+    return data;
+  }, [data]);
   return (
     <div className="min-h-screen w-full flex bg-bgmain">
       <Sidebar />
       <div className="w-full h-full bg-bgmain grid grid-cols-5 gap-6 p-4 m-4 ml-10 rounded-xl">
-        {data.map((e, i) => {
+        {memoData.map((e, i) => {
           return (
             <Item
               id={e.id}
